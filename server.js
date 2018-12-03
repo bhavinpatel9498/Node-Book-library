@@ -16,6 +16,7 @@ app.use(fileUpload());
 
 const adminbookget = require('./adminBookGet');
 const adminbookpost = require('./adminBookPost');
+const adminbookhomeget = require('./adminBookHomeGet');
 
 
 /* End Define Js files*/
@@ -33,21 +34,27 @@ mongoose.connect('mongodb://localhost:27017/libdb', { useNewUrlParser: true, use
 		console.log("Mongoose Successful");
 	
 
-		app.get('/admin/books', function(req, res){
+		app.get('/admin/books/add', function(req, res){
 
 			adminbookget(req, res, mongoose);
 
 		});
 		//End get admin book form
 
-		app.post('/admin/books', function(req, res){
+		app.post('/admin/books/add', function(req, res){
 
 			adminbookpost(req, res, mongoose);
 
 		});
 		//End post admin book form
 
+		app.get('/admin/books', function(req, res){
 
+			adminbookhomeget(req, res, mongoose);
+
+		});
+
+		
 		app.listen(port, function() {
 
 			console.log('Books application runnning on port '+port+'.');
