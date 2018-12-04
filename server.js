@@ -10,6 +10,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(fileUpload());
 
+let session = require('client-sessions');
+
+app.use(session({
+  cookieName: 'sessionnode',
+  secret: 'dummy_secret_key_node',
+  duration: 20 * 1000,
+  activeDuration: 20 * 1000,
+}));
 
 
 /* Define all js files here */
@@ -23,6 +31,9 @@ const normalhomeget = require('./normalHomeGet');
 const normalbookget = require('./normalBookGet');
 const translateget = require('./translateGet');
 const translatepost = require('./translatePost');
+const loginpageget = require('./loginPageGet');
+const loginpagepost = require('./loginPagePost');
+const logoutget = require('./logoutGet');
 
 
 /* End Define Js files*/
@@ -98,6 +109,26 @@ mongoose.connect('mongodb://localhost:27017/libdb', { useNewUrlParser: true, use
 			translatepost(req, res);
 
 		});
+
+		app.get('/login', function(req, res){
+
+			loginpageget(req, res);
+
+		});
+
+		app.post('/login', function(req, res){
+
+			loginpagepost(req, res);
+
+		});
+
+		app.post('/logout', function(req, res){
+
+			logoutget(req, res);
+
+		});
+		
+
 
 
 		app.listen(port, function() {
