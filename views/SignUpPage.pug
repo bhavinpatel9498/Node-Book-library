@@ -1,0 +1,78 @@
+doctype html
+html(lang='en')
+  head
+    title Sign UP
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+  body
+    .container(align='center')
+      .panel.panel-primary
+        .panel-heading(style='height: 100px;')
+          h2 EBook Library Sign Up
+        .panel-body
+          form#dataForm(method='POST')
+            .form-group(style='width: 30%')
+              label(for='firstname') First Name
+              input#firstname.form-control(type='text', name='firstname')
+            .form-group(style='width: 30%')
+              label(for='lastname') Last Name
+              input#lastname.form-control(type='text', name='lastname')
+            .form-group(style='width: 30%')
+              label(for='email') Email
+              input#email.form-control(type='text', name='email')
+            .form-group(style='width: 30%')
+              label(for='username') Username
+              input#username.form-control(type='text', name='username')
+            .form-group(style='width: 30%')
+              label(for='pass') Password
+              input#pass.form-control(type='password', name='pass')
+        
+          button#sendBtn.btn.btn-success(type='button', style='margin: 10px') Join Us
+          button#homeBtn.btn.btn-warning(type='button') Home Page
+                    
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+    script(type='text/javascript', src='http://ajax.aspnetcdn.com/ajax/jquery.validate/1.7/jquery.validate.min.js')
+
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+    script(type='text/javascript').
+      $(document).ready(function() {
+
+         $('#dataForm').validate({ // initialize the plugin
+        rules: 
+        {
+            firstname: {
+                required: true,
+                minlength: 3
+            },
+            lastname: {
+                required: true,
+                minlength: 3
+            },
+            email: {
+                required: true,
+                minlength: 5
+            },
+            pass: {
+                required: true,
+                minlength: 5
+            },
+            username: {
+                required: true,
+                minlength: 3
+            }
+        }
+       });
+
+
+      $('#sendBtn').bind("click",function(){
+
+      console.log('submit clicked');
+      $('#dataForm').submit();
+
+      });// send btn
+
+      $('#homeBtn').bind("click",function(){
+      window.location.href = "/login";
+      });
+      });

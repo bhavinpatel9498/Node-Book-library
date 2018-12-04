@@ -19,7 +19,9 @@ html(lang='en')
               label(for='pass') Password
               input#pass.form-control(type='password', name='pass', value='admin')
              
-          button#saveBtn.btn.btn-warning(type='button', style='margin: 10px') Login
+          button#saveBtn.btn.btn-success(type='button', style='margin: 10px') Login
+          button#signBtn.btn.btn-warning(type='button', style='margin: 10px') Sign up
+
                     
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
     script(type='text/javascript', src='http://ajax.aspnetcdn.com/ajax/jquery.validate/1.7/jquery.validate.min.js')
@@ -51,4 +53,10 @@ html(lang='en')
 
       });//save btn
      
+     $('#signBtn').bind("click",function(){
+
+      console.log('submit clicked');
+      window.location.href = "/signup";
+      });//sign btn
+
       });

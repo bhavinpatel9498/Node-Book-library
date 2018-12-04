@@ -38,6 +38,8 @@ const normalrequestget = require('./normalRequestGet');
 const normalrequestpost = require('./normalRequestPost');
 const adminrequestget = require('./adminRequestGet');
 const homepageroute = require('./homePageRoute');
+const signUppageget = require('./signUpPageGet');
+const signUppagepost = require('./signUpPagePost');
 
 /* End Define Js files*/
 
@@ -124,6 +126,18 @@ mongoose.connect('mongodb://bpatel68:bpatel68@ds225624.mlab.com:25624/booklibdb'
 		app.post('/login', function(req, res){
 
 			loginpagepost(req, res);
+
+		});
+
+		app.get('/signup', function(req, res){
+
+			signUppageget(req, res);
+
+		});
+
+		app.post('/signup', function(req, res){
+
+			signUppagepost(req, res);
 
 		});
 
