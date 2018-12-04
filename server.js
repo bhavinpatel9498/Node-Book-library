@@ -43,7 +43,9 @@ const homepageroute = require('./homePageRoute');
 
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/libdb', { useNewUrlParser: true, useFindAndModify: false }, function(err, res){
+
+//mongoose.connect('mongodb://localhost:27017/libdb', { useNewUrlParser: true, useFindAndModify: false }, function(err, res){
+mongoose.connect('mongodb://bpatel68:bpatel68@ds225624.mlab.com:25624/booklibdb', { useNewUrlParser: true, useFindAndModify: false }, function(err, res){
 
 	if(err)
 	{
