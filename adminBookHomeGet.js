@@ -1,6 +1,12 @@
 
 function fnAdminBookHomeGet(req, res, mongoose){
 
+	if(req.sessionnode.user != "admin")
+	{
+		res.status(200).redirect('/login');
+		return;
+	}
+
 	const BookModel = require('./bookSchema');
 
 	BookModel.find({}, null, {sort: '-bookname'}, function(err, books){

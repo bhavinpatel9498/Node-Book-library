@@ -1,5 +1,11 @@
 function fnTranslatePost(req, res){
 
+	if(req.sessionnode.user != "normal")
+	{
+		res.status(204).send();
+		return;
+	}
+
 	let orgtext = req.body.orgtext;
 
 	const {Translate} = require('@google-cloud/translate');

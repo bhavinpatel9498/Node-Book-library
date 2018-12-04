@@ -2,6 +2,12 @@
 
 function fnAdminBookPost(req, res, mongoose){
 
+    if(req.sessionnode.user != "admin")
+    {
+        res.status(200).redirect('/login');
+        return;
+    }
+
 	const s3BucketName = "bhavin-node-book-lib";
 	const BookModel = require('./bookSchema');
 

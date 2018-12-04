@@ -1,5 +1,11 @@
 function fnAadminBookUpdatePost(req, res, mongoose){
 
+	if(req.sessionnode.user != "admin")
+	{
+		res.status(200).redirect('/login');
+		return;
+	}
+
 	const BookModel = require('./bookSchema');
 
 	if(req.params.id && mongoose.Types.ObjectId.isValid(req.params.id))
