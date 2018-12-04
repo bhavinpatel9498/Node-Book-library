@@ -1,9 +1,12 @@
 
-function fnAdminBookHomeGet(req, res, mongoose){
+function fnNormalHomeGet(req, res, mongoose){
 
 	const BookModel = require('./bookSchema');
 
-	BookModel.find({}, null, {sort: '-bookname'}, function(err, books){
+
+	//BookModel.find({deleteFlag: "N"}, function(err, books){
+	//BookModel.find({$or:[{'deleteFlag':'N'}, {'deleteFlag':'n'}]}, function(err, books){
+	BookModel.find({$or:[{'deleteFlag':'N'}, {'deleteFlag':'n'}]}, null, {sort: '-bookname'}, function(err, books){
 
 		if(err)
 		{
@@ -18,7 +21,7 @@ function fnAdminBookHomeGet(req, res, mongoose){
 			if (books)
 			{
 				//res.status(200).send(books);
-				res.status(200).render('AdminBooksList', { booksList: books })
+				res.status(200).render('NormalBooksList', { booksList: books })
 			}
 			else
 			{
@@ -31,4 +34,4 @@ function fnAdminBookHomeGet(req, res, mongoose){
 	
 }
 
-module.exports = fnAdminBookHomeGet
+module.exports = fnNormalHomeGet

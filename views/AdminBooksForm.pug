@@ -9,33 +9,36 @@ html(lang='en')
     .container(align='center')
       .panel.panel-primary
         .panel-heading(style='height: 100px;')
-          h2 Book Details
+          h2 Add Book Details
         .panel-body
           form#dataForm(method='POST', enctype='multipart/form-data')
             .form-group(style='width: 30%')
               label(for='bookname') Book Name
-              input#bookname.form-control(type='text', name='bookname', value='bname')
+              input#bookname.form-control(type='text', name='bookname', value='')
+
             .form-group(style='width: 30%')
               label(for='usr') Author Name
-              input#author.form-control(type='text', name='author', value='author')
+              input#author.form-control(type='text', name='author', value='')
+
             .form-group(style='width: 30%')
               label(for='publisher') Publisher Name
-              input#publisher.form-control(type='text', name='publisher', value='bha')
+              input#publisher.form-control(type='text', name='publisher', value='')
+
             .form-group(style='width: 30%')
               label(for='version') Version
-              input#version.form-control(type='text', name='version', value='11')
+              input#version.form-control(type='text', name='version', value='')
+
             .form-group(style='width: 30%')
               label(for='file') Upload File
               input#file.form-control(type='file', name='file')
+
             .form-group(style='width: 30%')
               label(for='notes') Notes
-              input#notes.form-control(type='text', name='notes', value='temp note')
+              input#notes.form-control(type='text', name='notes', value='')
+              
           button#homeBtn.btn.btn-success(type='button', style='margin: 10px') Home Page
-          button#saveBtn.btn.btn-warning(type='button', style='margin: 10px; visibility: hidden; display:none') Upload Book
-          button#updateBtn.btn.btn-warning(type='button', style='margin: 10px; visibility: hidden; display:none') Update Details
-          button#deleteBtn.btn.btn-danger(type='button', style='margin: 10px; visibility: hidden; display:none') Delete Details
+          button#saveBtn.btn.btn-warning(type='button', style='margin: 10px') Upload Book
 
-          form#dataFormDelete(method='POST', action="/books/delete/"+book._id)
 
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
     script(type='text/javascript', src='http://ajax.aspnetcdn.com/ajax/jquery.validate/1.7/jquery.validate.min.js')
@@ -44,115 +47,67 @@ html(lang='en')
     script(type='text/javascript').
       $(document).ready(function() {
 
-      console.log("#{book._id}");
-    
-      let bookTitle = "#{book.title}";
-      let bookAuthor = "#{book.author}";
-      let numPages = "#{book.numPages}";
-
-      if(bookTitle)
-        $('#title').val(bookTitle);
-
-      if(bookAuthor)
-        $('#author').val(bookAuthor);  
-
-      if(numPages)
-        $('#numPages').val(numPages);
-
-      let operation = "#{operation}";
-
-      if(operation == "edit")
-      {
-          $("#deleteBtn").css("visibility","visible");
-          $("#deleteBtn").css("display","");
-          $("#updateBtn").css("visibility","visible");
-          $("#updateBtn").css("display","");
-          $("#saveBtn").css("visibility","hidden");
-          $("#saveBtn").css("display","none");
-      }
-      else
-      {
-          $("#deleteBtn").css("visibility","hidden");
-          $("#deleteBtn").css("display","none");
-          $("#updateBtn").css("visibility","hidden");
-          $("#updateBtn").css("display","none");
-          $("#saveBtn").css("visibility","visible");
-          $("#saveBtn").css("display","");
-      }
      
-      $('#homeBtn').bind("click",function(){
-       //window.location.href = window.location.hostname+"/books";
-       window.location.href = "/books";
-      });
 
-      $('#dataForm').validate({ // initialize the plugin
-        rules: 
-        {
-            bookname: {
-                required: true,
-                minlength: 2
-            },
-            author: {
-                required: true,
-                minlength: 1
-            },
-            file: {
-                required: true                
-            },
-            publisher: {
-                required: true,
-                minlength: 1
-            },
-            version: {
-                required: true,
-                number: true                
-            }
-        },
-        messages:
-        {
-            bookname: {
-              required: "Book Name is required",
-              minlength: "Book Name should be minimum five characters"
-            },
-            author: {
-              required: "Author Name is required",
-              minlength: "Author Name should be minimum five characters"
-            },
-            file: {
-              required: "Please select a file."              
-            },
-            publisher: {
-              required: "Publisher Name is required",
-              minlength: "Publisher Name should be minimum five characters"
-            }, 
-            version: {
-              required: "Version is required",
-              number: "Version should be numeric value"
-            }
-        }
-       });
+        $('#dataForm').validate({ // initialize the plugin
+          rules: 
+          {
+              bookname: {
+                  required: true,
+                  minlength: 5
+              },
+              author: {
+                  required: true,
+                  minlength: 5
+              },
+              file: {
+                  required: true                
+              },
+              publisher: {
+                  required: true,
+                  minlength: 5
+              },
+              version: {
+                  required: true,
+                  number: true                
+              }
+          },
+          messages:
+          {
+              bookname: {
+                required: "Book Name is required",
+                minlength: "Book Name should be minimum five characters"
+              },
+              author: {
+                required: "Author Name is required",
+                minlength: "Author Name should be minimum five characters"
+              },
+              file: {
+                required: "Please select a file."              
+              },
+              publisher: {
+                required: "Publisher Name is required",
+                minlength: "Publisher Name should be minimum five characters"
+              }, 
+              version: {
+                required: "Version is required",
+                number: "Version should be numeric value"
+              }
+          }
+         });
 
 
-      $('#saveBtn').bind("click",function(){
+        $('#saveBtn').bind("click",function(){
 
-      console.log('submit clicked');
-      $('#dataForm').submit();
+        console.log('submit clicked');
+        $('#dataForm').submit();
 
-      });//save btn
+        });//save btn
+      
+        $('#homeBtn').bind("click",function(){
+            //window.location.href = window.location.hostname+"/books";
+           window.location.href = "/admin/books";
+        });
 
-      $('#deleteBtn').bind("click",function(){
-
-      console.log('submit clicked');
-      $('#dataFormDelete').submit();
-
-      });//delete btn
-  
-
-      $('#updateBtn').bind("click",function(){
-
-      console.log('submit clicked');
-      $('#dataForm').submit();
-
-      });//delete btn
       
       });

@@ -1,0 +1,53 @@
+doctype html
+html(lang='en')
+  head
+    title Book Details
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(http-equiv='content-type', content='text/html; charset=UTF-8')
+
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+  body
+    .container(align='center')
+      .panel.panel-success
+        .panel-heading(style='height: 150px;')
+          h2 Book Details
+          button#HomeBtn.btn.btn-info(type='button', style='margin: 10px; width:200px;') Home Page
+        .panel-body
+
+        h4(style='margin: 10px; width:70%; text-align: left') Book name &emsp;&emsp;&emsp;&emsp;&nbsp;:&nbsp;
+          mark #{book.bookname}
+        h4(style='margin: 10px; width:70%; text-align: left') Author &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;:&nbsp;
+          mark #{book.author}
+        h4(style='margin: 10px; width:70%; text-align: left') Publisher &emsp;&emsp;&emsp;&emsp;&emsp;:&nbsp;
+          mark #{book.publisher} 
+        h4(style='margin: 10px; width:70%; text-align: left') Version &emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;:&nbsp;
+          mark #{book.version}
+        h4(style='margin: 10px; width:70%; text-align: left') Notes &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;:&nbsp;
+          mark #{book.notes}
+        h4(style='margin: 10px; width:70%; text-align: left') Creation Date &emsp;&emsp;&emsp;:&nbsp;
+          mark #{book.dateCreated}
+
+        br
+    span
+      embed(src= s3url, width='70%', height='500px', type='text/html')
+    span
+      iframe(src='/books/translate', width='30%', height='500px', frameborder='0')
+
+    
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+
+    script(type='text/javascript').
+      $(document).ready(function() {
+
+
+        $('#HomeBtn').bind("click",function(){          
+          window.location.href = "/normal/books";
+        });
+
+
+      });
+
+    
+

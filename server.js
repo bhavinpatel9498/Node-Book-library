@@ -17,6 +17,12 @@ app.use(fileUpload());
 const adminbookget = require('./adminBookGet');
 const adminbookpost = require('./adminBookPost');
 const adminbookhomeget = require('./adminBookHomeGet');
+const adminbookupdateget = require('./adminBookUpdateGet');
+const adminbookupdatepost = require('./adminBookUpdatePost');
+const normalhomeget = require('./normalHomeGet');
+const normalbookget = require('./normalBookGet');
+const translateget = require('./translateGet');
+const translatepost = require('./translatePost');
 
 
 /* End Define Js files*/
@@ -32,6 +38,9 @@ mongoose.connect('mongodb://localhost:27017/libdb', { useNewUrlParser: true, use
 	else
 	{
 		console.log("Mongoose Successful");
+
+		//delete mongoDB for testing with fresh DB
+		//mongoose.connection.db.dropDatabase();
 	
 
 		app.get('/admin/books/add', function(req, res){
@@ -54,7 +63,43 @@ mongoose.connect('mongodb://localhost:27017/libdb', { useNewUrlParser: true, use
 
 		});
 
-		
+		app.get('/admin/books/update/:id', function(req, res){
+
+			adminbookupdateget(req, res, mongoose);
+
+		});
+
+		app.post('/admin/books/update/:id', function(req, res){
+
+			adminbookupdatepost(req, res, mongoose);
+
+		});
+
+		app.get('/normal/books', function(req, res){
+
+			normalhomeget(req, res, mongoose);
+
+		});
+
+		app.get('/normal/books/:id', function(req, res){
+
+			normalbookget(req, res, mongoose);
+
+		});
+
+		app.get('/books/translate', function(req, res){
+
+			translateget(req, res);
+
+		});
+
+		app.post('/books/translate', function(req, res){
+
+			translatepost(req, res);
+
+		});
+
+
 		app.listen(port, function() {
 
 			console.log('Books application runnning on port '+port+'.');

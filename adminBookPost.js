@@ -18,7 +18,9 @@ function fnAdminBookPost(req, res, mongoose){
 		Bucket: s3BucketName, 
 		Key: book._id+'', 
 		Body: uploadedFile.data, 
-		ACL: 'public-read'
+		ACL: 'public-read',
+        ContentType: "application/pdf",
+        CacheControl: "no-cache"
 	};
 
     s3.putObject(params, function(err, data) {
@@ -39,8 +41,7 @@ function fnAdminBookPost(req, res, mongoose){
      			res.status(200).render('ErrorPage', { errMsg: errsave });     			
      		}
      		else
-     		{
-     			console.log("Save Successful");
+     		{     			
      			res.status(200).redirect('/admin/books');
      		}
 

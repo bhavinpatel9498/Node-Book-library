@@ -1,0 +1,147 @@
+doctype html
+html(lang='en')
+  head
+    title Admin Update Book
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(http-equiv='content-type', content='text/html; charset=UTF-8')
+
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+  body
+    .container(align='center')
+      .panel.panel-primary
+        .panel-heading(style='height: 100px;')
+          h2 Update Book Details
+                    
+        .panel-body
+
+          form#dataForm(method='POST', enctype='multipart/form-data')
+            .form-group(style='width: 30%')
+              label(for='bookname') Book Name
+              input#bookname.form-control(type='text', name='bookname', value=book.bookname)
+
+            .form-group(style='width: 30%')
+              label(for='usr') Author Name
+              input#author.form-control(type='text', name='author', value=book.author)
+
+            .form-group(style='width: 30%')
+              label(for='publisher') Publisher Name
+              input#publisher.form-control(type='text', name='publisher', value=book.publisher)
+
+            .form-group(style='width: 30%')
+              label(for='version') Version
+              input#version.form-control(type='text', name='version', value=book.version)
+
+            .form-group(style='width: 30%')
+              label(for='file') Upload File
+              input#file.form-control(type='file', name='file')
+
+            .form-group(style='width: 30%')
+              label(for='notes') Notes
+              input#notes.form-control(type='text', name='notes', value=book.notes)
+
+            .form-group(style='width: 30%')
+              label(for='deleteflag') Delete Flag
+              input#deleteflag.form-control(type='text', name='deleteflag', value=book.deleteFlag)
+
+            button#homeBtn.btn.btn-success(type='button', style='margin: 10px') Home Page
+            button#updateBtn.btn.btn-warning(type='button', style='margin: 10px;') Update Details
+        
+          br
+          br
+          
+          embed(src= s3url, width='800px', height='700px', type='text/html')
+
+    
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+    script(type='text/javascript', src='http://ajax.aspnetcdn.com/ajax/jquery.validate/1.7/jquery.validate.min.js')
+
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+
+    script(type='text/javascript').
+      $(document).ready(function() {
+
+
+
+        $('#dataForm').validate({ // initialize the plugin
+        rules: 
+        {
+            bookname: {
+                required: true,
+                minlength: 5
+            },
+            author: {
+                required: true,
+                minlength: 5
+            },
+            deleteflag: {
+                required: true,
+                minlength: 1,
+                maxlength: 1,
+                customvalidation: true               
+            },
+            publisher: {
+                required: true,
+                minlength: 5
+            },
+            version: {
+                required: true,
+                number: true                
+            }
+        },
+        messages:
+        {
+            bookname: {
+              required: "Book Name is required",
+              minlength: "Book Name should be minimum five characters"
+            },
+            author: {
+              required: "Author Name is required",
+              minlength: "Author Name should be minimum five characters"
+            },
+            deleteflag: {
+              required: "Please provide delete flag Y or N.",
+              minlength: "Please provide delete flag Y or N.",
+              maxlength: "Please provide delete flag Y or N."              
+            },
+            publisher: {
+              required: "Publisher Name is required",
+              minlength: "Publisher Name should be minimum five characters"
+            }, 
+            version: {
+              required: "Version is required",
+              number: "Version should be numeric value"
+            }
+        }
+       });
+
+
+        $.validator.addMethod("customvalidation", function(value, element){
+              
+              if("Y" == value || "N" == value || "y" == value || "n" == value)
+              {
+                return true;
+              }
+              else
+              {
+                return false;
+              }
+              
+           },
+            "Please provide delete flag Y or N"
+        );
+
+        $('#homeBtn').bind("click",function(){
+          //window.location.href = window.location.hostname+"/books";
+          window.location.href = "/admin/books";
+        });
+
+        $('#updateBtn').bind("click",function(){
+          $('#dataForm').submit();
+        });
+
+
+      });
+
+    
+

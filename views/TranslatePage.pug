@@ -1,0 +1,60 @@
+doctype html
+html(lang='en')
+  head
+    title Bootstrap Example
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+    script(src='http://ajax.aspnetcdn.com/ajax/jquery.validate/1.7/jquery.validate.min.js')
+  body
+    .container(align='center')
+      form#transform(method='POST')
+        .form-group(style='width: 100%')
+          label(for='orgtext') Original Text
+          textarea#orgtext.form-control(rows='5', name='orgtext')
+        button#transbtn.btn.btn-info(name='transbtn', type='button') Translate
+        br
+        br
+      div(style='width: 100%', align='center')
+        label(for='transtext') Translated French Text
+        textarea#transtext.form-control(rows='5')
+    script.
+      $('#transform').validate({ // initialize the plugin
+      rules:
+      {
+      orgtext: {
+      required: true,
+      minlength: 1
+      }
+      }
+      });
+      $('#transbtn').bind("click",function(){
+      console.log('Translate clicked');
+      //$('#transform').submit();
+      let orgtext = "";
+      if($("#transform").valid())
+      {
+      orgtext = $("#orgtext").val();
+      }
+      else
+      {
+      return;
+      }
+     
+      $.ajax({
+      'url' : '/books/translate',
+      'type' : 'POST',
+      'data' : {
+      'orgtext' : orgtext
+      },
+      'success' : function(data) {
+          $("#transtext").val(data.transtext);
+      },
+      'error' : function(request,error)
+      {
+        console.log(error);
+      }
+      });
+      });//save btn
