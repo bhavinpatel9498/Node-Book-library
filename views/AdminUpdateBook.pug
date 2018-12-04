@@ -87,6 +87,9 @@ html(lang='en')
             version: {
                 required: true,
                 number: true                
+            },
+            file: {
+              customfilevalidation: true
             }
         },
         messages:
@@ -129,6 +132,40 @@ html(lang='en')
               
            },
             "Please provide delete flag Y or N"
+        );
+
+        $.validator.addMethod("customfilevalidation", function(value, element){
+              
+            if(value== '')
+            {                
+                return true;
+            }
+            else
+            {
+
+              let fileextn = value.substr(value.lastIndexOf('.') + 1).toLowerCase();
+              let extn = ['pdf'];
+              if (fileextn.length > 0)
+              {
+                  if (extn.indexOf(fileextn) === -1) 
+                  {                      
+                      return false;
+                  }
+                  else
+                  {
+                    return true;
+                  }
+              }
+              else
+              {
+                return true;
+              }
+
+            }
+
+           },
+            "Please provide only pdf files"        
+            
         );
 
         $('#homeBtn').bind("click",function(){
