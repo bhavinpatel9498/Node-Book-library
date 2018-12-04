@@ -27,6 +27,8 @@ html(lang='en')
                     td= book.author
                     td= book.publisher
                     td= book.version
+      
+      form#logoutform(method='POST', action="/logout")
 
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
@@ -36,7 +38,7 @@ html(lang='en')
 
         $('#logoutBtn').bind("click",function(){
           //window.location.href = window.location.hostname+"/books";
-          window.location.href = "/admin/books/add";
+          $('#logoutform').submit();
         });
 
 

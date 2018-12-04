@@ -11,6 +11,7 @@ html(lang='en')
         .panel-heading(style='height: 150px;')
           h2 Books List
           button#addBookBtn.btn.btn-info(type='button', style='margin: 10px; width:200px;') Add Book
+          button#logoutBtn.btn.btn-info(type='button', style='margin: 10px; width:200px;') Logout
         .panel-body
           table.table.table-striped
             thead
@@ -29,6 +30,9 @@ html(lang='en')
                     td= book.publisher
                     td= book.version
                     td= book.deleteFlag
+
+      form#logoutform(method='POST', action="/logout")
+
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
 
@@ -38,6 +42,11 @@ html(lang='en')
         $('#addBookBtn').bind("click",function(){
           //window.location.href = window.location.hostname+"/books";
           window.location.href = "/admin/books/add";
+        });
+
+        $('#logoutBtn').bind("click",function(){
+          //window.location.href = window.location.hostname+"/books";
+          $('#logoutform').submit();
         });
 
 
