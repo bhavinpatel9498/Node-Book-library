@@ -4,11 +4,11 @@ let Schema = mongoose.Schema;
 
 let requestSchema = new Schema({
 
-	username	: { type: String, required: true},
-	emailid		: { type: String, required: true},
+	version		: { type: String, required: true},
+	author		: { type: String, required: true},
 	bookname	: { type: String, required: true},
 	publisher	: { type: String, required: true},
-	notes		: { type: String, required: true},
+	notes		: { type: String, required: false},
 	dateCreated	: { type: Date,   required: false, default: Date.now}   
 	
 });

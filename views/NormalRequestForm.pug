@@ -1,0 +1,103 @@
+doctype html
+html(lang='en')
+  head
+    title Add Request
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+  body
+    .container(align='center')
+      .panel.panel-primary
+        .panel-heading(style='height: 100px;')
+          h2 Add New Book Request
+        .panel-body
+          form#dataForm(method='POST', enctype='multipart/form-data')
+            .form-group(style='width: 30%')
+              label(for='bookname') Book Name
+              input#bookname.form-control(type='text', name='bookname', value='')
+
+            .form-group(style='width: 30%')
+              label(for='usr') Author Name
+              input#author.form-control(type='text', name='author', value='')
+
+            .form-group(style='width: 30%')
+              label(for='publisher') Publisher Name
+              input#publisher.form-control(type='text', name='publisher', value='')
+
+            .form-group(style='width: 30%')
+              label(for='version') Version
+              input#version.form-control(type='text', name='version', value='')
+
+            .form-group(style='width: 30%')
+              label(for='notes') Notes
+              input#notes.form-control(type='text', name='notes', value='')
+              
+          button#homeBtn.btn.btn-success(type='button', style='margin: 10px') Home Page
+          button#saveBtn.btn.btn-warning(type='button', style='margin: 10px') Save Request
+
+
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+    script(type='text/javascript', src='http://ajax.aspnetcdn.com/ajax/jquery.validate/1.7/jquery.validate.min.js')
+
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+    script(type='text/javascript').
+      $(document).ready(function() {
+
+     
+
+        $('#dataForm').validate({ // initialize the plugin
+          rules: 
+          {
+              bookname: {
+                  required: true,
+                  minlength: 5
+              },
+              author: {
+                  required: true,
+                  minlength: 5
+              },
+              publisher: {
+                  required: true,
+                  minlength: 5
+              },
+              version: {
+                  required: true,
+                  number: true                
+              }
+          },
+          messages:
+          {
+              bookname: {
+                required: "Book Name is required",
+                minlength: "Book Name should be minimum five characters"
+              },
+              author: {
+                required: "Author Name is required",
+                minlength: "Author Name should be minimum five characters"
+              },
+              publisher: {
+                required: "Publisher Name is required",
+                minlength: "Publisher Name should be minimum five characters"
+              }, 
+              version: {
+                required: "Version is required",
+                number: "Version should be numeric value"
+              }
+          }
+         });
+
+
+        $('#saveBtn').bind("click",function(){
+
+        console.log('submit clicked');
+        $('#dataForm').submit();
+
+        });//save btn
+      
+        $('#homeBtn').bind("click",function(){
+            //window.location.href = window.location.hostname+"/books";
+           window.location.href = "/normal/books";
+        });
+
+      
+      });

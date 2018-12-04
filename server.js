@@ -34,7 +34,10 @@ const translatepost = require('./translatePost');
 const loginpageget = require('./loginPageGet');
 const loginpagepost = require('./loginPagePost');
 const logoutget = require('./logoutGet');
-
+const normalrequestget = require('./normalRequestGet');
+const normalrequestpost = require('./normalRequestPost');
+const adminrequestget = require('./adminRequestGet');
+const homepageroute = require('./homePageRoute');
 
 /* End Define Js files*/
 
@@ -127,9 +130,37 @@ mongoose.connect('mongodb://localhost:27017/libdb', { useNewUrlParser: true, use
 			logoutget(req, res);
 
 		});
+
+		app.get('/normal/request/add', function(req, res){
+
+			normalrequestget(req, res, mongoose);
+
+		});
+
+		app.post('/normal/request/add', function(req, res){
+
+			normalrequestpost(req, res, mongoose);
+
+		});		
+
+
+		app.get('/admin/request', function(req, res){
+
+			adminrequestget(req, res, mongoose);
+
+		});
+
+
+		app.get('/home', function(req, res){
+
+			homepageroute(req, res);
+
+		});
 		
 
-
+		app.all('*', function(req, res){
+			res.status(204).redirect('/login');
+		});
 
 		app.listen(port, function() {
 

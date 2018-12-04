@@ -1,7 +1,7 @@
 doctype html
 html(lang='en')
   head
-    title Books List
+    title Admin Request List
     meta(charset='utf-8')
     meta(name='viewport', content='width=device-width, initial-scale=1')
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
@@ -9,27 +9,27 @@ html(lang='en')
     .container(align='center')
       .panel.panel-success
         .panel-heading(style='height: 150px;')
-          h2 Books List
-          button#requestBtn.btn.btn-info(type='button', style='margin: 10px; width:200px;') New Book Request
-          button#logoutBtn.btn.btn-info(type='button', style='margin: 10px; width:200px;') Logout
+          h2 New Book Request List
+          button#homeBtn.btn.btn-success(type='button', style='margin: 10px') Home Page
         .panel-body
           table.table.table-striped
             thead
               tr
-                th(width='30%') Book Name
-                th(width='25%') Author
-                th(width='30%') Publisher
-                th(width='15%') Version
+                th(width='20%') Book Name
+                th(width='15%') Author
+                th(width='15%') Publisher
+                th(width='5%') Version
+                th(width='15%') Notes
+                th(width='30%') Request Date
             tbody
                 each book in booksList
                   tr
-                    td(class='h3')
-                      a(href='/normal/books/' + book._id)= book.bookname
+                    td= book.bookname
                     td= book.author
                     td= book.publisher
                     td= book.version
-      
-      form#logoutform(method='POST', action="/logout")
+                    td= book.notes
+                    td= book.dateCreated
 
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
@@ -37,14 +37,9 @@ html(lang='en')
     script(type='text/javascript').
       $(document).ready(function() {
 
-        $('#logoutBtn').bind("click",function(){
-          //window.location.href = window.location.hostname+"/books";
-          $('#logoutform').submit();
-        });
-
-        $('#requestBtn').bind("click",function(){
+        $('#homeBtn').bind("click",function(){
             //window.location.href = window.location.hostname+"/books";
-           window.location.href = "/normal/request/add";
+           window.location.href = "/admin/books";
         });
 
 
