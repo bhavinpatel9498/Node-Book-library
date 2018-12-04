@@ -15,8 +15,8 @@ let session = require('client-sessions');
 app.use(session({
   cookieName: 'sessionnode',
   secret: 'dummy_secret_key_node',
-  duration: 20 * 1000,
-  activeDuration: 20 * 1000,
+  duration: 60 * 1000,
+  activeDuration: 60 * 1000,
 }));
 
 
